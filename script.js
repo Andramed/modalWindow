@@ -31,7 +31,7 @@ const addEventListenerBtn = (btn1, btn2) => {
 		
     }
 	document.addEventListener('keydown', function(event) {
-		if(event.key == "Escape" && !modalWindow.classList.contains('hidden')) {
+		if(event.key == "Escape") {
 				closeModalWindow();
 		}
 	})
