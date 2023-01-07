@@ -2,7 +2,7 @@
 
 const modalWindow = document.querySelector('.modal-window');
 const divOverlay = document.querySelector('.overlay');
-const divHiden = document.querySelector('.hidden').te;
+const divHiden = document.querySelector('.hidden');
 const body = document.querySelector('body');
 
 
@@ -12,32 +12,30 @@ const btnCloseModalWindow = document.querySelector('.close-modal-window');
 const addClass = (element, addedClass) => {
     element.classList.add(addedClass);
 }
-
-const whereIsClick = (element) => {
-    console.log(element);
-    let clickedElement = element.addEventListener('click', function(event) {
-        let elementClick = event.target.className;
-    });
-}                                                
-
-
+const removeClass = (element, removedClass) => {
+	element.classList.remove(removedClass);
+}
+const closeModalWindow = () => {
+		addClass(modalWindow, 'hidden');
+		addClass(divOverlay, 'hidden')
+}
+const openModalWindow = () => {
+	removeClass(modalWindow, 'hidden');
+	removeClass(divOverlay, 'hidden');
+}
 const addEventListenerBtn = (btn1, btn2) => {
-    console.log(btn1);
     for(let i = 0; i < btn1.length; i++) {
-        btn1[i].addEventListener('click', function() {
-            modalWindow.classList.remove('hidden');
-            divOverlay.classList.remove('hidden');
-        })
-
-        btn2.addEventListener('click', function() {
-            addClass(modalWindow, 'hidden');
-            addClass(divOverlay, 'hidden')
-        })
-        divOverlay.addEventListener('click', function(){
-            addClass(modalWindow, 'hidden');
-            addClass(divOverlay, 'hidden')
-        })
+        btn1[i].addEventListener('click', openModalWindow);
+        btn2.addEventListener('click', closeModalWindow);
+        divOverlay.addEventListener('click', closeModalWindow);
+		
     }
+	document.addEventListener('keydown', function(event) {
+		if(event.key == "Escape" && !modalWindow.classList.contains('hidden')) {
+				closeModalWindow();
+		}
+	})
+	
 }
 
 addEventListenerBtn(btnShowModalWindow, btnCloseModalWindow);
